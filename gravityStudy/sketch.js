@@ -9,40 +9,46 @@ Sources:
 - Inspiration for the project: https://natureofcode.com/book/chapter-2-forces/
 */
 
+let planetCount = 3;
+
 let particleList;
-let planetList;
+let planetList = new Array();
 function setup() {
   colorMode(HSB);
   createCanvas(1080, 1080);
   background(45, 50, 75);
 
   //initalize our particle classes
-  particleList = [makeParticle()];
-  for (let i = 0; i < 40; i++)
+  particleList = new Array();
+  for (let i = 0; i < planetCount; i++)
   {
     particleList.push(makeParticle());
   }
 
+  planetList.push(new Planet(createVector(width / 2, height / 2), 15));
+  // planetList = [new Planet(createVector(width / 4, height * 3 /4), 25)];
+  // planetList.push(new Planet(createVector(width * 3 / 4, height / 4), 25));
+  // planetList.push(new Planet(createVector(width / 4, height /4), 25));
+  // planetList.push(new Planet(createVector(width * 3 / 4, height * 3 / 4), 25));
 
-  planetList = [new Planet(createVector(width / 4, height * 3 /4), 25)];
-  planetList.push(new Planet(createVector(width * 3 / 4, height / 4), 25));
-  planetList.push(new Planet(createVector(width / 4, height /4), 25));
-  planetList.push(new Planet(createVector(width * 3 / 4, height * 3 / 4), 25));
-
-  stroke(255);
-  strokeWeight(20);
   // point(planetList[0].pos.x, planetList[0].pos.y);
    // particleList.push(new Particle(createVector(random(width), random(height)), createVector(0.03, 0.05), 10))
   // particleList[0].calcVel(particleList[1]);
   // particleList[1].calcVel(particleList[0]);
 }
 
+let dt = 0;
+
 function draw() {
-  // background(0, 0, 0);
-  strokeWeight(20);
+  background(45 + dt, 50, 75, 0.2);
+  dt += 0.1;
+  strokeWeight(10);
   // point(planetList[0].pos.x, planetList[0].pos.y);
   for (let j = 0; j < particleList.length; j++)
   {
+    // beginShape();
+    // stroke(45 + 360, 50, 20, 1);
+    // vertex(particleList[j].pos.x, particleList[j].pos.y);
     for (let k = 0; k < particleList.length; k++)
     {
       if (j != k)
@@ -57,25 +63,43 @@ function draw() {
       // point(planetList[q].pos.x, planetList[q].pos.y);
       particleList[j].calcVel(planetList[q]);
     }
+    particleList[j].moveParticle();
+    // vertex(particleList[j].pos.x, particleList[j].pos.y);
+    // endShape();
   }
-
+  stroke(45 + 360, 50, 20, 1);
   for (let i = 0; i < particleList.length; i++)
   {
-    // stroke(map(particleList[i].pos.x, 0, width, 0, 360), 100, 255, 0.1);
-    stroke(5, 40, map(particleList[i].pos.dist(createVector(width / 2, height / 2)), 0, width / 2, 100, 0), 0.1);
-
-    strokeWeight(particleList[i].mass);
-    particleList[i].moveParticle();
-    point(particleList[i].pos.x, particleList[i].pos.y);
-    // strokeWeight(1);
-    // stroke(255, 0, 0);
-    // line(particleList[i].pos.x, particleList[i].pos.y,
-      // particleList[i].pos.x + (particleList[i].vel.x * 100), particleList[i].pos.y + (particleList[i].vel.y * 100));
+    beginShape();
+    vertex(particleList[i].pos.x, particleList[i].pos.y);
+    vertex(particleList[(i+1) % particleList.length].pos.x, particleList[(i+1) % particleList.length].pos.y);
+    endShape();
   }
+
+  // beginShape();
+  // for (let i = 0; i < particleList.length; i++)
+  // {
+  //   vertex(particleList[i].pos.x, particleList[i].pos.y);
+  // }
+  // endShape(CLOSE);
+
+  // for (let i = 0; i < particleList.length; i++)
+  // {
+  //   // stroke(map(particleList[i].pos.x, 0, width, 0, 360), 100, 255, 0.1);
+  //   // stroke(45, 40, map(particleList[i].pos.dist(createVector(width / 2, height / 2)), 0, width / 2, 100, 40), 0.5);
+  //   stroke(45 + 360, 50, 20, 1);
+  //   strokeWeight(particleList[i].mass);
+  //   particleList[i].moveParticle();
+  //   point(particleList[i].pos.x, particleList[i].pos.y);
+  //   // strokeWeight(1);
+  //   // stroke(255, 0, 0);
+  //   // line(particleList[i].pos.x, particleList[i].pos.y,
+  //     // particleList[i].pos.x + (particleList[i].vel.x * 100), particleList[i].pos.y + (particleList[i].vel.y * 100));
+  // }
 
 }
 
 function makeParticle()
 {
-  return new Particle(createVector(random(width), random(height)), createVector(random(2) - 1, random(2) - 1), random(8));
+  return new Particle(createVector(random(width - width / 2) + width / 4, random(height - height / 2) + height / 4), createVector(random(2) - 1, random(2) - 1), random(10) + 5);
 }

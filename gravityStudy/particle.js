@@ -7,7 +7,7 @@ class Particle
     this.vel = vel;
     this.mass = mass;
 
-    this.grav = 0.9;
+    this.grav = 1.2;
   }
 
   calcVel(ref)
@@ -16,7 +16,7 @@ class Particle
 
     let force = p5.Vector.sub(this.pos, ref.pos);
     let distance = force.mag();
-    distance = constrain(distance, 5, 75);
+    distance = constrain(distance, 12, 75);
     force.normalize();
     let strength = this.grav * (this.mass * ref.mass) / distance ** 2;
     force.mult(strength);
