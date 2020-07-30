@@ -31,12 +31,16 @@ function setup() {
   //recording junk
   frameRate(60);
 
+  startRecording({
+    preset:"verySlow",
+    crf: 18,
+  });
 }
 
 let dt = 0;
 
 function draw() {
-  background(45 + dt, 50, 75, 0.2);
+  // background(45 + (dt / 2), 50, 75, 0.2);
   dt += 0.1;
   strokeWeight(10);
   // point(planetList[0].pos.x, planetList[0].pos.y);
@@ -55,7 +59,7 @@ function draw() {
 
     for (let q = 0; q < planetList.length; q++)
     {
-      stroke(0, 0, 255);
+
       // point(planetList[q].pos.x, planetList[q].pos.y);
       particleList[j].calcVel(planetList[q]);
     }
@@ -70,6 +74,12 @@ function draw() {
     vertex(particleList[i].pos.x, particleList[i].pos.y);
     vertex(particleList[(i+1) % particleList.length].pos.x, particleList[(i+1) % particleList.length].pos.y);
     endShape();
+  }
+
+  if (dt >= 180)
+  {
+    stopRecording();
+    noLoop();
   }
 
   // beginShape();
@@ -92,6 +102,10 @@ function draw() {
   //   // line(particleList[i].pos.x, particleList[i].pos.y,
   //     // particleList[i].pos.x + (particleList[i].vel.x * 100), particleList[i].pos.y + (particleList[i].vel.y * 100));
   // }
+  background((4 * abs(sin(dt * PI/180))) + 45, 50, 75, abs(cos(dt * PI/90)));
+
+  // background(45 + dt, 50, 75, abs(cos(dt * PI/120)));
+  // background(45 + dt, 50, 75, 1);
 
 }
 
