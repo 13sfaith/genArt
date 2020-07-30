@@ -26,15 +26,11 @@ function setup() {
   }
 
   planetList.push(new Planet(createVector(width / 2, height / 2), 15));
-  // planetList = [new Planet(createVector(width / 4, height * 3 /4), 25)];
-  // planetList.push(new Planet(createVector(width * 3 / 4, height / 4), 25));
-  // planetList.push(new Planet(createVector(width / 4, height /4), 25));
-  // planetList.push(new Planet(createVector(width * 3 / 4, height * 3 / 4), 25));
 
-  // point(planetList[0].pos.x, planetList[0].pos.y);
-   // particleList.push(new Particle(createVector(random(width), random(height)), createVector(0.03, 0.05), 10))
-  // particleList[0].calcVel(particleList[1]);
-  // particleList[1].calcVel(particleList[0]);
+
+  //recording junk
+  frameRate(60);
+
 }
 
 let dt = 0;
