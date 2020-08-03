@@ -1,7 +1,7 @@
 let particleList;
 let aggregateGrid;
-let pixelSize = 10;
-let pixelCount = 1000;
+let pixelSize = 20;
+let pixelCount = 100;
 
 function setup() {
   createCanvas(720, 720);
@@ -17,11 +17,12 @@ function setup() {
     particleList.push(new Particle(createVector(floor(random(width / pixelSize)) * pixelSize, floor(random(height / pixelSize)) * pixelSize), pixelSize));
   }
 
-  for (let i = 0; i < width; i += pixelSize)
-  {
-    aggregateGrid.push(createVector(i, height / 2));
-    print('yep');
-  }
+  // for (let i = 0; i < width; i += pixelSize)
+  // {
+  //   aggregateGrid.push(createVector(i, height / 2));
+  // }
+
+  aggregateGrid.push(createVector(width / 2, height /2));
 }
 
 
@@ -53,7 +54,7 @@ function draw() {
       {
         for (let k = 0; k < aggregateGrid.length; k++)
         {
-          if (coords[j].equals(aggregateGrid[k]))
+          if (coords[j].equals(aggregateGrid[k]) && particleList[i].active == true)
           {
             aggregateGrid.push(pos);
             particleList[i].deactivate();
