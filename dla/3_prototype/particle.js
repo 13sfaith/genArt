@@ -1,9 +1,10 @@
 class Particle
 {
-  constructor(pos, ps)
+  constructor(pos, ps, hu)
   {
     this.pos = pos;
     this.ps = ps;
+    this.hu = hu;
     this.active = true;
   }
 

@@ -1,13 +1,13 @@
 let particleList;
 let aggregateGrid;
-let pixelSize = 7;
-let pixelCount = 1000;
-let hu = 40;
+let pixelSize = 8;
+let pixelCount = 4000;
+let hu = 30;
 
 function setup() {
-  createCanvas(720, 720);
+  createCanvas(1080, 1080);
   colorMode(HSB, 100);
-  background(10, 40, 60);
+  background(60, 40, 40);
   frameRate(31);
 
   particleList = new Array();
@@ -16,7 +16,8 @@ function setup() {
   //create particles
   for (let i = 0; i < pixelCount; i++)
   {
-    particleList.push(new Particle(createVector(floor(random(width / pixelSize)) * pixelSize, floor(random(height / pixelSize)) * pixelSize), pixelSize));
+    // particleList.push(new Particle(createVector(floor(random(width / pixelSize)) * pixelSize, floor(random(height / pixelSize)) * pixelSize), pixelSize));
+    particleList.push(genPar());
   }
 
   // for (let i = 0; i < width; i += pixelSize)
@@ -24,7 +25,7 @@ function setup() {
   //   aggregateGrid.push(createVector(i, height / 2));
   // }
   noStroke();
-  fill(hu, 40, 70);
+
   for (let i = 0; i < TWO_PI; i += 0.1)
   {
     aggregateGrid.push(new Aggregate(createVector(cos(i) * (width / 4) + (width / 2), sin(i) * (height / 4)+ (height / 2)), pixelSize));
@@ -34,7 +35,7 @@ function setup() {
   // aggregateGrid.push(new Aggregate(createVector(width * (3 / 4), height /4), pixelSize));
   // aggregateGrid.push(new Aggregate(createVector(width * (3 / 4), height * (3 / 4)), pixelSize));
   // aggregateGrid.push(new Aggregate(createVector(width / 4, height * (3 / 4)), pixelSize));
-  fill(hu, 40, 70);
+
 
   for (let i = 0; i < aggregateGrid.length; i++)
   {
@@ -47,12 +48,12 @@ function draw() {
   // background(0);
   // noStroke();
   colorMode(HSB, 100);
-  fill(0, 40, hu);
+  fill(37, 40, hu);
 
   // for (let i = 0; i < aggregateGrid.length; i++)
   // {
   //   fill(hu, 40, 70);
-  //   circle(aggregateGrid[i].pos.x, aggregateGrid[i].pos.y, aggregateGrid[i].size);
+    // circle(aggregateGrid[i].pos.x, aggregateGrid[i].pos.y, aggregateGrid[i].size);
   // }
 
   for (let i = 0; i < particleList.length; i++)
@@ -86,13 +87,21 @@ function draw() {
     {
       particleList.splice(i, 1);
       pixelSize -= 0.001;
-      hu += 0.01;
+      hu += 0.001;
       if (pixelSize > 1)
       {
-        particleList.push(new Particle(createVector(floor(random(width / pixelSize)) * pixelSize, floor(random(height / pixelSize)) * pixelSize), pixelSize));
+        particleList.push(genPar());
       }
     }
   }
 
   // noLoop();
+}
+
+function genPar()
+{
+  return new Particle(createVector(random(10) + width / 2, random(10) + height / 2), pixelSize);
+  // return new Particle(createVector((random(width / 5) + width / 3), (random(height / 5) + height / 3)), pixelSize);
+  // return new Particle(createVector((random(1) * width / 4), (random(1) * height / 4)), pixelSize);
+
 }
