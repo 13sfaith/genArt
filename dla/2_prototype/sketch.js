@@ -1,7 +1,7 @@
 let particleList;
 let aggregateGrid;
 let pixelSize = 7;
-let pixelCount = 7000;
+let pixelCount = 1000;
 let hu = 40;
 
 function setup() {
