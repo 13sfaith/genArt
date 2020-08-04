@@ -1,7 +1,7 @@
 let particleList;
 let aggregateGrid;
 let pixelSize = 20;
-let pixelCount = 100;
+let pixelCount = 200;
 
 function setup() {
   createCanvas(720, 720);
@@ -17,12 +17,12 @@ function setup() {
     particleList.push(new Particle(createVector(floor(random(width / pixelSize)) * pixelSize, floor(random(height / pixelSize)) * pixelSize), pixelSize));
   }
 
-  // for (let i = 0; i < width; i += pixelSize)
-  // {
-  //   aggregateGrid.push(createVector(i, height / 2));
-  // }
+  for (let i = 0; i < width; i += pixelSize)
+  {
+    aggregateGrid.push(createVector(i, height / 2));
+  }
 
-  aggregateGrid.push(createVector(width / 2, height /2));
+  // aggregateGrid.push(createVector(width / 2, height /2));
 }
 
 
@@ -42,7 +42,7 @@ function draw() {
 
       let pos = particleList[i].pos;
       fill(255);
-      // rect(pos.x, pos.y, pixelSize, pixelSize);
+      rect(pos.x, pos.y, pixelSize, pixelSize);
       particleList[i].move();
 
       // particleList[i].set(mv);
