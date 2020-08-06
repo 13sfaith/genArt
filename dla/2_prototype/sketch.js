@@ -1,11 +1,11 @@
 let particleList;
 let aggregateGrid;
 let pixelSize = 8;
-let pixelCount = 4000;
+let pixelCount = 1000;
 let hu = 30;
 
 function setup() {
-  createCanvas(1080, 1080);
+  createCanvas(720, 720);
   colorMode(HSB, 100);
   background(60, 40, 40);
   frameRate(31);
@@ -24,14 +24,14 @@ function setup() {
   // {
   //   aggregateGrid.push(createVector(i, height / 2));
   // }
-  noStroke();
+  // noStroke();
 
-  for (let i = 0; i < TWO_PI; i += 0.1)
-  {
-    aggregateGrid.push(new Aggregate(createVector(cos(i) * (width / 4) + (width / 2), sin(i) * (height / 4)+ (height / 2)), pixelSize));
-  }
+  // for (let i = 0; i < TWO_PI; i += 0.1)
+  // {
+  //   aggregateGrid.push(new Aggregate(createVector(cos(i) * (width / 4) + (width / 2), sin(i) * (height / 4)+ (height / 2)), pixelSize));
+  // }
 
-  // aggregateGrid.push(new Aggregate(createVector(width / 4, height /4), pixelSize));
+  aggregateGrid.push(new Aggregate(createVector(width / 4, height /4), pixelSize));
   // aggregateGrid.push(new Aggregate(createVector(width * (3 / 4), height /4), pixelSize));
   // aggregateGrid.push(new Aggregate(createVector(width * (3 / 4), height * (3 / 4)), pixelSize));
   // aggregateGrid.push(new Aggregate(createVector(width / 4, height * (3 / 4)), pixelSize));
@@ -49,7 +49,7 @@ function draw() {
   // noStroke();
   colorMode(HSB, 100);
   fill(37, 40, hu);
-
+  stroke(37, 40, hu);
   // for (let i = 0; i < aggregateGrid.length; i++)
   // {
   //   fill(hu, 40, 70);
@@ -75,7 +75,12 @@ function draw() {
         if (pos.dist(aggregateGrid[k].pos) <= aggregateGrid[k].size * (.9))
         {
           aggregateGrid.push(new Aggregate(pos, pixelSize));
-          circle(aggregateGrid[k].pos.x, aggregateGrid[k].pos.y, aggregateGrid[k].size);
+          strokeWeight(aggregateGrid[k].size);
+          beginShape(POINTS);
+          vertex(aggregateGrid[k].pos.x, aggregateGrid[k].pos.y);
+          // vertex(aggregateGrid[k + 1 % aggregateGrid.length].pos.x, aggregateGrid[k + 1 % aggregateGrid.length].pos.y);
+          endShape();
+          // circle(aggregateGrid[k].pos.x, aggregateGrid[k].pos.y, aggregateGrid[k].size);
           particleList[i].deactivate();
           break;
         }

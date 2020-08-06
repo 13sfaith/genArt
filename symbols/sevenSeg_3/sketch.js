@@ -1,7 +1,7 @@
 let vertList;
-let rows = 3, cols = 3;
+let rows =3, cols = 5;
 let counter = 0;
-let max;
+let max, distanceLimit;
 
 function setup() {
   createCanvas(720, 720);
@@ -22,7 +22,12 @@ function setup() {
     }
   }
 
-  frameRate(1);
+  frameRate(60);
+
+  if (rows * cols > 4)
+  {
+    distanceLimit = (vertList[0].pos.dist(vertList[rows + 2].pos));
+  }
 
 }
 
@@ -30,22 +35,26 @@ function setup() {
 function draw() {
   background(30);
   stroke(255);
-  strokeWeight(10);
   setActives();
   for (let i = 0; i < vertList.length; i++)
   {
+    strokeWeight(10);
     if (vertList[i].active)
     {
       point(vertList[i].pos.x, vertList[i].pos.y);
+      strokeWeight(5);
       for(let j = 0; j < vertList.length; j++)
       {
-        beginShape();
-        vertex(vertList[i].pos.x, vertList[i].pos.y);
-        if (vertList[j].active)
+        if (vertList[i].pos.dist(vertList[j].pos) <= distanceLimit)
         {
-          vertex(vertList[j].pos.x, vertList[j].pos.y);
+          beginShape();
+          vertex(vertList[i].pos.x, vertList[i].pos.y);
+          if (vertList[j].active)
+          {
+            vertex(vertList[j].pos.x, vertList[j].pos.y);
+          }
+          endShape();
         }
-        endShape();
       }
     }
   }

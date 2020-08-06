@@ -9,13 +9,13 @@ Sources:
 - Inspiration for the project: https://natureofcode.com/book/chapter-2-forces/
 */
 
-let planetCount = 3;
+let planetCount = 50;
 
 let particleList;
 let planetList = new Array();
 function setup() {
   colorMode(HSB);
-  createCanvas(1080, 1080);
+  createCanvas(1500, 500);
   background(45, 50, 75);
 
   //initalize our particle classes
@@ -25,21 +25,23 @@ function setup() {
     particleList.push(makeParticle());
   }
 
-  planetList.push(new Planet(createVector(width / 2, height / 2), 15));
+  planetList.push(new Planet(createVector(width /4, height / 2), 15));
+  planetList.push(new Planet(createVector(width * (3/4), height / 2), 15));
 
 
   //recording junk
   frameRate(60);
 
-  startRecording({
-    preset:"verySlow",
-    crf: 18,
-  });
+  // startRecording({
+  //   preset:"verySlow",
+  //   crf: 18,
+  // });
 }
 
 let dt = 0;
 
 function draw() {
+  background(45, 50, 75,0.1);
   // background(45 + (dt / 2), 50, 75, 0.2);
   dt += 0.1;
   strokeWeight(10);
@@ -47,13 +49,13 @@ function draw() {
   for (let j = 0; j < particleList.length; j++)
   {
     // beginShape();
-    // stroke(45 + 360, 50, 20, 1);
+    // stroke(45, 50, 20, 1);
     // vertex(particleList[j].pos.x, particleList[j].pos.y);
     for (let k = 0; k < particleList.length; k++)
     {
       if (j != k)
       {
-        particleList[j].calcVel(particleList[k]);
+        // particleList[j].calcVel(particleList[k]);
       }
     }
 
@@ -67,20 +69,20 @@ function draw() {
     // vertex(particleList[j].pos.x, particleList[j].pos.y);
     // endShape();
   }
-  stroke(45 + 360, 50, 20, 1);
+  stroke(45, 50, 20, 1);
   for (let i = 0; i < particleList.length; i++)
   {
-    beginShape();
+    beginShape(POINTS);
     vertex(particleList[i].pos.x, particleList[i].pos.y);
-    vertex(particleList[(i+1) % particleList.length].pos.x, particleList[(i+1) % particleList.length].pos.y);
+    // vertex(particleList[(i+1) % particleList.length].pos.x, particleList[(i+1) % particleList.length].pos.y);
     endShape();
   }
 
-  if (dt >= 180)
-  {
-    stopRecording();
-    noLoop();
-  }
+  // if (dt >= 180)
+  // {
+  //   stopRecording();
+  //   noLoop();
+  // }
 
   // beginShape();
   // for (let i = 0; i < particleList.length; i++)
@@ -102,10 +104,10 @@ function draw() {
   //   // line(particleList[i].pos.x, particleList[i].pos.y,
   //     // particleList[i].pos.x + (particleList[i].vel.x * 100), particleList[i].pos.y + (particleList[i].vel.y * 100));
   // }
-  background((4 * abs(sin(dt * PI/180))) + 45, 50, 75, abs(cos(dt * PI/90)));
+  // background((4 * abs(sin(dt * PI/180))) + 45, 50, 75, abs(cos(dt * PI/90)));
 
   // background(45 + dt, 50, 75, abs(cos(dt * PI/120)));
-  // background(45 + dt, 50, 75, 1);
+  // background(45, 50, 75, 1);
 
 }
 
