@@ -1,3 +1,12 @@
+/*Approaching this 4th iteration with the idea of
+filling in a potential shape (starting with a triangle)
+over a "binary time interval"
+
+The idea being that I can generate specific shapes with a basic outline (vertList)
+and then use this shape and active the points dynamically utilizing a binary counter
+(for more info see the 3rd iteration)
+*/
+
 let vertList;
 let rows = 5, cols = 5;
 let counter = 0;
