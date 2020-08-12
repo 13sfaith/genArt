@@ -1,5 +1,5 @@
 let vertList;
-let rows = 5, cols = 5;
+let rows = 4, cols = 5;
 let counter = 0;
 let max, distanceLimit;
 
@@ -33,20 +33,19 @@ function setup() {
 
 
 function draw() {
-  background(30, 30, 30, 1);
+  background(30);
   stroke(255);
-  // stroke(255, 255, 255, 1);
   setActives();
   for (let i = 0; i < vertList.length; i++)
   {
     strokeWeight(10);
     if (vertList[i].active)
     {
-      // point(vertList[i].pos.x, vertList[i].pos.y);
+      point(vertList[i].pos.x, vertList[i].pos.y);
       strokeWeight(5);
       for(let j = 0; j < vertList.length; j++)
       {
-        if (vertList[i].pos.dist(vertList[j].pos) < distanceLimit)
+        if (vertList[i].pos.dist(vertList[j].pos) <= distanceLimit)
         {
           beginShape();
           vertex(vertList[i].pos.x, vertList[i].pos.y);
