@@ -24,12 +24,12 @@ Spencer Faith
 
 ## TODO
 
-- [ ] Tidy up the Gravity Study
-  - [ ] make the colors nicer give it some pizzazz
+- [x] Tidy up the Gravity Study
+  - [x] make the colors nicer give it some pizzazz (check twitter header)
   - [ ] intergrate webGL (possibly?)
   - [ ] create README
 
-- [ ] Just go crazy with some walker experiments (more  to come?)
+- [x] Just go crazy with some walker experiments (more  to come?)
 
 - [ ] Finish CircumCircle README
 - [ ] Finish ranSquare README
