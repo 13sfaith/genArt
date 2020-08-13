@@ -1,5 +1,5 @@
 let vertList;
-let rows = 4, cols = 5;
+let rows = 3, cols = 5;
 let counter = 0;
 let max, distanceLimit;
 
