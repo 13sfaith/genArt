@@ -10,13 +10,13 @@ uniform float u_time;
 float hash(vec2 p)
 {
   vec3 p3 = fract(vec3(p.xyx) * 0.13);
-  p3 += dot(p3, p3.yzx + 3.333);
+  p3 += dot(p3, p3.yzx + 333.333);
   return fract((p3.x + p3.y) * p3.z);
 }
 
 float hash(float p)
 {
-  p = fract(p * 0.011);
+  p = fract(p * 0.11);
   p *= p + 7.5;
   p *= p + p; return
   fract(p);
@@ -46,16 +46,17 @@ void main()
   vec2 coord = vTexCoord;
 
   coord = coord * 4.0;
-  vec3 effect = vec3(noise(vec3(coord, u_time / 2.0)));
-  effect.r = noise(vec3(coord, (u_time / 2.0) + 0.1));
+  // u_time = u_time / (sin(coord.x) * 2.0);
+  vec3 effect = vec3(noise(vec3(coord, (u_time / (abs(sin(u_time) * 2.0) + 2.0)))));
+  effect.r = noise(vec3(coord, (u_time) + 0.1));
 
   effect.r = smoothstep(0.5, 0.9, effect.r);
 
-  effect.b = smoothstep(0.8, 0.9, effect.b);
+  effect.b = smoothstep(0.7, 0.9, effect.b);
 
   effect.g = smoothstep(0.4, 1.0, effect.g);
 
-  vec4 color = vec4(vec3(effect), 1.0);
+  vec4 color = vec4(vec3(1.0 - effect), 1.0);
 
   gl_FragColor = color;
 }
