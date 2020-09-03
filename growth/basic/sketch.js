@@ -24,4 +24,6 @@ function draw() {
 
   fungi.display();
   fungi.move();
+  // print('hello');
+  // noLoop();
 }
