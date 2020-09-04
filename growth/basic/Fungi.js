@@ -41,19 +41,19 @@ class Fungi
       prev = (i === 0 ? this.points[this.points.length - 1] : this.points[--i]);
 
       // slp = createVector(prev.x - cur.x, prev.y - cur.y);
-      slp = p5.Vector.sub(prev, cur);
+      slp = p5.Vector.sub(cur, prev);
       dist = prev.dist(cur);
       // print('slp:' + slp);
       // print('prev:' + prev);
 
-      this.points[i].sub(slp.mult(createVector(amt, amt)));
+      this.points[i].add(slp.mult(createVector(amt, amt)));
 
       post = this.points[++i % this.points.length];
-      slp = p5.Vector.sub(post, cur);
+      slp = p5.Vector.sub(cur, post);
       dist =  post.dist(cur);
       // print(slp);
 
-      this.points[i].sub(slp.mult(createVector(amt, amt)));
+      this.points[i].add(slp.mult(createVector(amt, amt)));
     }
 
     // let slp = createVector(this.points[1].x - this.points[0].x, this.points[1].y - this.points[0].y);
