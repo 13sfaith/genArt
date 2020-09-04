@@ -31,29 +31,31 @@ class Fungi
   move()
   {
     let amt = 0.1;
-    let slp, dist;
-    let prev, post, cur;
+    let dif;
+    let prev, post, cur, mid;
 
     for (let i = 0; i < this.points.length; i++)
     {
+      // print(this.points[i].mag());
       cur = this.points[i];
+      prev = (i === 0 ? this.points[this.points.length - 1] : this.points[i - 1]);
+      post = this.points[(i + 1) % this.points.length];
+      mid = createVector((prev.x + post.x) /  2, (prev.y + post.y) / 2);
 
-      prev = (i === 0 ? this.points[this.points.length - 1] : this.points[--i]);
+      point(mid.x, mid.y);
 
-      // slp = createVector(prev.x - cur.x, prev.y - cur.y);
-      slp = p5.Vector.sub(cur, prev);
-      dist = prev.dist(cur);
-      // print('slp:' + slp);
-      // print('prev:' + prev);
+      if (mid.mag() > cur.mag())
+      {
+        dif = p5.Vector.sub(mid, cur);
+        this.points[i].add(dif.mult(createVector(amt, amt)));
+      }
+      else
+      {
+        dif = p5.Vector.sub(cur, mid);
+        this.points[i].sub(dif.mult(createVector(amt, amt)));
+      }
 
-      this.points[i].add(slp.mult(createVector(amt, amt)));
 
-      post = this.points[++i % this.points.length];
-      slp = p5.Vector.sub(cur, post);
-      dist =  post.dist(cur);
-      // print(slp);
-
-      this.points[i].add(slp.mult(createVector(amt, amt)));
     }
 
     // let slp = createVector(this.points[1].x - this.points[0].x, this.points[1].y - this.points[0].y);
@@ -64,8 +66,4 @@ class Fungi
     // this.points[0].y += (amt * slp.y);
   }
 
-  createPoint()
-  {
-
-  }
 }

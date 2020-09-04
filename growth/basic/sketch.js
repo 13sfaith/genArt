@@ -1,5 +1,5 @@
 let fungi;
-let scale = 20;
+let scale = 100;
 
 function setup() {
   createCanvas(720, 720);
@@ -15,7 +15,7 @@ function setup() {
   noFill();
   stroke(255);
 
-  frameRate(1);
+  frameRate(10);
 }
 
 
@@ -24,6 +24,7 @@ function draw() {
 
   fungi.display();
   fungi.move();
+  // fungi.grow();
   // print('hello');
   // noLoop();
 }
